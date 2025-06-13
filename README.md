@@ -1,4 +1,4 @@
-#Proyecto-Final-Redes
+**#Proyecto-Final-Redes**
 Proyecto Final de Redes de Computadores, donde se implementó proxy, host virtuales, DNS e Iptables
 
 Requisitos para el funcionamiento del proyecto 
