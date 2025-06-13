@@ -5,6 +5,7 @@ Proyecto Final de Redes de Computadores, donde se implementó proxy, host virtua
 **Requisitos para el funcionamiento del proyecto** 
 
 **instalación de Docker**
+
 En Docker es recomendable crear una cuenta para el optimo funcionamiento 
 
 **Instalar WSL mediante los siguientes comandos en la terminal**
