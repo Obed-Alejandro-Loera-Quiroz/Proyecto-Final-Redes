@@ -7,7 +7,7 @@ Proyecto Final de Redes de Computadores, donde se implementó proxy, host virtua
 **instalación de Docker**
 En Docker es recomendable crear una cuenta para el optimo funcionamiento 
 
-**Instalar WSL mediante los siguientes comandos** 
+**Instalar WSL mediante los siguientes comandos en la terminal**
 
 wsl --install
 
@@ -23,14 +23,14 @@ Abre el menú inicio y busca Ubuntu.
 
 Abrirlo por primera vez, se instalará y te pedirá el nombre de usuario y la contraseña 
 
-**Instalar el navegador FireFox **
+**Instalar el navegador FireFox**
 
 En cualquier navegador disponible buscar FireFox e instala según tu sistema operativo, no asignes FireFox como navegador predeterminado 
 
 Ingresa al navegador y ve a la parte de ajustes, busca el apartado de configuración de red que lo mas seguro es que se encuentre hasta el final de ajustes
 En la parte de Proxy HTTP ingresar localhost y en el apartado de Puerto poner 3128
 
-**PRIMER PASO **
+**PRIMER PASO**
 
 Clonar el repositorio dentro de Linux que fue agregado con base a la instalación de Ubuntu, ingresar a la carpeta de Ubuntu después entrar a la home, dentro esta la carpeta de usuario que anteriormente se asigno en la terminal de Ubuntu y en esta carpeta se clona el proyecto.
 
