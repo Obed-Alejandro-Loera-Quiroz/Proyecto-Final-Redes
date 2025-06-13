@@ -18,7 +18,7 @@ wsl --set-default-version 2
 
 **Instalar Ubuntu** 
 
-Abre la Microsoft, busca Ubuntu, elige la versión que mas gustes e instala o en algunos casos aparece la opción de obtener 
+Abre Microsoft Store, busca Ubuntu, elige la versión que mas gustes e instala o en algunos casos aparece la opción de obtener 
 
 Abre el menú inicio y busca Ubuntu.
 
