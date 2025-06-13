@@ -2,9 +2,11 @@
 Proyecto Final de Redes de Computadores, donde se implementó proxy, host virtuales, DNS e Iptables
 
 Requisitos para el funcionamiento del proyecto 
-o	instalación de Docker
+
+instalación de Docker
 En Docker es recomendable crear una cuenta para el optimo funcionamiento 
-o	Instalar WSL mediante los siguientes comandos 
+
+Instalar WSL mediante los siguientes comandos 
 wsl --install
 Esto instalará WSL, la última versión del kernel de Linux y Ubuntu automáticamente (en Windows 11). Después reiniciar la PC o laptop y por último, configure WSL 2 como predeterminado con el siguiente comando:
 wsl --set-default-version 2
