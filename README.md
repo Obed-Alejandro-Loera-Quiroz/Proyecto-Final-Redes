@@ -34,7 +34,7 @@ No asignes FireFox como navegador predeterminado, ingresa al navegador y ve a la
 
 ## PRIMER PASO
 
-Clonar el repositorio dentro del apartado **Linux** que fue agregado con base a la instalación de Ubuntu, esto se encuentra muy cerca del apartado de **Este equipo**, ingresar a la carpeta de **Ubuntu** después entrar a **home**, dentro esta la **carpeta de usuario** que anteriormente se asigno en la terminal de Ubuntu y en esta carpeta se clona el proyecto.
+Clonar el repositorio dentro del apartado **Linux** que fue agregado con base a la instalación de Ubuntu, esto se encuentra muy cerca del apartado de **Este equipo**, ingresar a la carpeta de **Ubuntu** después entrar a la carpeta **home**, dentro esta la **carpeta de usuario** que anteriormente se asigno en la terminal de Ubuntu y en esta carpeta se clona el proyecto.
 
 ## SEGUNDO PASO
 
