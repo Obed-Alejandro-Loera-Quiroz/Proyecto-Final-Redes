@@ -34,13 +34,13 @@ No asignes FireFox como navegador predeterminado, ingresa al navegador y ve a la
 
 ## PRIMER PASO
 
-Clonar el repositorio dentro de Linux que fue agregado con base a la instalación de Ubuntu, ingresar a la carpeta de Ubuntu después entrar a la home, dentro esta la carpeta de usuario que anteriormente se asigno en la terminal de Ubuntu y en esta carpeta se clona el proyecto.
+Clonar el repositorio dentro del apartado **Linux** que fue agregado con base a la instalación de Ubuntu, esto se encuentra muy cerca del apartado de **Este equipo**, ingresar a la carpeta de **Ubuntu** después entrar a **home**, dentro esta la **carpeta de usuario** que anteriormente se asigno en la terminal de Ubuntu y en esta carpeta se clona el proyecto.
 
 ## SEGUNDO PASO
 
 En este punto abrimos la terminal de Ubuntu, para esto primero abres tu terminal como normalmente se hace, en el apartado derecho viene una flecha hacia abajo, presionamos esta y nos mostrara vaarias terminales, en este caso seleccionamos la de Ubuntu
 
-Con esto realizado vamos a comenzar con las cosas solicitadas en proyecto. Primeramente ingresando el siguiente comando para colocarnos en la carpeta del proyecto 
+Con esto realizado y esta en la terminal de Ubuntu vamos a comenzar con las cosas solicitadas en proyecto. Primeramente ingresando el siguiente comando para colocarnos en la carpeta del proyecto, de igual manera es necesario abrir docker para este punto 
 
 `cd Proyecto-Final`
 
