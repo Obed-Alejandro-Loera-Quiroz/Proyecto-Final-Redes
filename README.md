@@ -50,11 +50,11 @@ En este punto nos vamos a la carpeta de squid mediante
 
 `cd Redes-proyecto`
 
-Dentro vamos a poner los siguientes comandos 
+Dentro vamos a poner los siguientes comandos, cabe aclarar que en este punto puede que tarde argunos minutos, principalmente porque es la primera vez se se construye el contenedor y tambien depende mucho de la conexion a internet 
 
 `docker build -t squid-proxy .`
 
-En caso de que te marque error poner el siguiente comando 
+En caso de que te marque error poner el siguiente comando y en caso de que no, hacer caso omiso a este apartado 
 
 `docker buildx build -t squid-proxy .`
 
@@ -62,7 +62,9 @@ Esto lo que hace es que levantara el contenedor de squid y proxy, después de es
 
 `docker run -d --name squid-proxy -p 3128:3128 squid-proxy`
 
-Este comando permite la ejecución del contenedor. Dentro del navegador FireFox ya con la configuración establecida anteriormente podemos hacer la búsqueda de las siguientes páginas las cuales te mostraran una restricción por parte de proxy:
+Este comando permite la ejecución del contenedor. 
+
+Podras apreciar como en Docker el contenedor de **squid-proxy** ya fue creado.Ahora bien dentro del navegador FireFox ya con la configuración establecida anteriormente podemos hacer la búsqueda de las siguientes páginas las cuales te mostraran una restricción por parte de proxy:
 
 - Facebook.com
 
@@ -77,4 +79,36 @@ Este comando permite la ejecución del contenedor. Dentro del navegador FireFox 
 Cualquier otra pagina te debe permitir el acceso 
 
 Para regresar a de carpeta se puede poner el comando `cd ..`
+
+### 2. Host Virtuales
+
+Despues de haber regresado a la  carpeta inicial, ponemos el siguiente comando para colocarnos en la carpeta
+
+`cd webserver`
+
+A continuacion colocar el siguiente comando, para la creacion del contenedor, esto puede tardar varios minutos 
+
+`docker network create apache-net`
+
+Despues poner el siguiente comando 
+
+`docker run -d --name apache-server --network apache-net -p 8080:80 apache-mis-sitios`
+
+Con esto, ya tenemos el contenedor incial para los host virtuales mediante apache, ahora es necesario crear un contenedor cliente que nos ayudara a que nuestro proyecto funcione correctamente, esto mediante el siguiente comando
+
+`docker run -it --rm --name cliente --network apache-net curlimages/curl sh`
+
+En caso de que este comando indique algun error colocar el siguiente comando que lo que hace es buscar la imagen, si esta no se encuentra la crea, despues poner este comando, es necesario colocar el que se encuntra antes de este apartado. En el caso de que el anterior comando no indique ningun error hacer caso omiso a ese apartado
+
+`docker pull curlimages/curl`
+
+Al poner este comando ya solo es necesario poner los siguientes comandos que nos mostraran el apto funcionamiento de esta parte del proyecto
+
+`curl -H "Host: site1.local" http://apache-server`
+
+`curl -H "Host: site2.local" http://apache-server`
+
+`curl -H "Host: site3.local" http://apache-server`
+
+
 
