@@ -76,3 +76,5 @@ Este comando permite la ejecución del contenedor. Dentro del navegador FireFox 
 
 Cualquier otra pagina te debe permitir el acceso 
 
+Para regresar a de carpeta se puede poner el comando `cd ..`
+
