@@ -1,77 +1,78 @@
-**# Proyecto-Final-Redes**
+# Proyecto-Final-Redes
 
 Proyecto Final de Redes de Computadores, donde se implementó proxy, host virtuales, DNS e Iptables
 
-**Requisitos para el funcionamiento del proyecto** 
+### Requisitos para el funcionamiento del proyecto 
 
-**instalación de Docker**
+#### - Instalación de Docker
 
-En Docker es recomendable crear una cuenta para el optimo funcionamiento 
+En cualquier navegador disponible en el dispositivo buscar docker, ingrear a la primera pagina disponible e ir al aparatdo de descarga, en ese apartado hay varias opciones de instalacion, elige la mas apropiada segun tu PC. En Docker es recomendable crear una cuenta para el optimo funcionamiento 
 
-**Instalar WSL mediante los siguientes comandos en la terminal**
+[Instalacion de Docker](https://www.docker.com/)
 
-wsl --install
+#### - Instalar WSL mediante los siguientes comandos en la terminal
+
+`wsl --install`
 
 Esto instalará WSL, la última versión del kernel de Linux y Ubuntu automáticamente (en Windows 11). Después reiniciar la PC o laptop y por último, configure WSL 2 como predeterminado con el siguiente comando:
 
-wsl --set-default-version 2
+`wsl --set-default-version 2`
 
-**Instalar Ubuntu** 
+#### - Instalar Ubuntu 
 
-Abre Microsoft Store, busca Ubuntu, elige la versión que mas gustes e instala o en algunos casos aparece la opción de obtener 
+Abre Microsoft Store, busca Ubuntu, elige la versión que mas gustes e instala o en algunos casos aparece la opción de obtener, abre el menú inicio y busca Ubuntu. Al abrirlo por primera vez, se instalará y te pedirá el nombre de usuario y la contraseña 
 
-Abre el menú inicio y busca Ubuntu.
+#### - Instalar el navegador FireFox
 
-Abrirlo por primera vez, se instalará y te pedirá el nombre de usuario y la contraseña 
+En cualquier navegador disponible buscar FireFox e instala según tu sistema operativo
 
-**Instalar el navegador FireFox**
+[Instalacion de Firefox](https://mozilla-firefox.softonic.com/)
 
-En cualquier navegador disponible buscar FireFox e instala según tu sistema operativo, no asignes FireFox como navegador predeterminado 
+No asignes FireFox como navegador predeterminado, ingresa al navegador y ve a la parte de ajustes, busca el apartado de configuración de red que lo mas seguro es que se encuentre hasta el final de ajustes
 
-Ingresa al navegador y ve a la parte de ajustes, busca el apartado de configuración de red que lo mas seguro es que se encuentre hasta el final de ajustes
-En la parte de Proxy HTTP ingresar localhost y en el apartado de Puerto poner 3128
+**En la parte de Proxy HTTP ingresar localhost y en el apartado de Puerto poner 3128**
 
-**PRIMER PASO**
+## PRIMER PASO
 
 Clonar el repositorio dentro de Linux que fue agregado con base a la instalación de Ubuntu, ingresar a la carpeta de Ubuntu después entrar a la home, dentro esta la carpeta de usuario que anteriormente se asigno en la terminal de Ubuntu y en esta carpeta se clona el proyecto.
 
-**SEGUNDO PASO**
+## SEGUNDO PASO
 
-En este punto abrimos la terminal de Ubuntu y vamos a comenzar con las cosas solicitadas en proyecto. Primeramente ingresando el siguiente comando para colocarnos en la carpeta del proyecto 
+En este punto abrimos la terminal de Ubuntu, para esto primero abres tu terminal como normalmente se hace, en el apartado derecho viene una flecha hacia abajo, presionamos esta y nos mostrara vaarias terminales, en este caso seleccionamos la de Ubuntu
 
-cd Proyecto-Final
+Con esto realizado vamos a comenzar con las cosas solicitadas en proyecto. Primeramente ingresando el siguiente comando para colocarnos en la carpeta del proyecto 
 
-**Squid – Proxy**
+`cd Proyecto-Final`
+
+### 1. Squid – Proxy
 
 En este punto nos vamos a la carpeta de squid mediante 
 
-cd Redes-proyecto
+`cd Redes-proyecto`
 
 Dentro vamos a poner los siguientes comandos 
 
-**docker build -t squid-proxy .**
+`docker build -t squid-proxy .`
 
 En caso de que te marque error poner el siguiente comando 
 
-**docker buildx build -t squid-proxy .**
+`docker buildx build -t squid-proxy .`
 
 Esto lo que hace es que levantara el contenedor de squid y proxy, después de esto se ingresa el siguiente comando 
 
-**docker run -d --name squid-proxy -p 3128:3128 squid-proxy**
+`docker run -d --name squid-proxy -p 3128:3128 squid-proxy`
 
-Este comando permite la ejecución del contenedor
+Este comando permite la ejecución del contenedor. Dentro del navegador FireFox ya con la configuración establecida anteriormente podemos hacer la búsqueda de las siguientes páginas las cuales te mostraran una restricción por parte de proxy:
 
-Dentro del navegador FireFox ya con la configuración establecida anteriormente podemos hacer la búsqueda de las siguientes páginas las cuales te mostraran una restricción por parte de proxy:
+- Facebook.com
 
-o	 Facebook.com
+- Instagram.com
 
-o	 Instagram.com
+- GitHub.com
 
-o	 GitHub.com
+- Youtube.com
 
-o	 Youtube.com
-
-o	 TikTok.com
+- TikTok.com
 
 Cualquier otra pagina te debe permitir el acceso 
 
