@@ -110,5 +110,6 @@ Al poner este comando ya solo es necesario poner los siguientes comandos que nos
 
 `curl -H "Host: site3.local" http://apache-server`
 
+### 3. DNS - Bind
 
 
