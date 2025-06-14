@@ -37,13 +37,15 @@ Clonar el repositorio dentro de Linux que fue agregado con base a la instalació
 
 **SEGUNDO PASO**
 
-En este punto abrimos la terminal de Ubuntu y vamos a comenzar con las cosas solicitadas en proyecto.
+En este punto abrimos la terminal de Ubuntu y vamos a comenzar con las cosas solicitadas en proyecto. Primeramente ingresando el siguiente comando para colocarnos en la carpeta del proyecto 
+
+cd Proyecto-Final
 
 **Squid – Proxy**
 
 En este punto nos vamos a la carpeta de squid mediante 
 
-**cd Redes-proyecto**
+cd Redes-proyecto
 
 Dentro vamos a poner los siguientes comandos 
 
@@ -61,14 +63,15 @@ Este comando permite la ejecución del contenedor
 
 Dentro del navegador FireFox ya con la configuración establecida anteriormente podemos hacer la búsqueda de las siguientes páginas las cuales te mostraran una restricción por parte de proxy:
 
-o	Facebook.com
+o	 Facebook.com
 
-o	Instagram.com
+o	 Instagram.com
 
-o	GitHub.com
+o	 GitHub.com
 
-o	Youtube.com
+o	 Youtube.com
 
-o	TikTok.com
+o	 TikTok.com
 
 Cualquier otra pagina te debe permitir el acceso 
+
