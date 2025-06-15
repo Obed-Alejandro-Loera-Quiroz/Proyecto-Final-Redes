@@ -110,6 +110,42 @@ Al poner este comando ya solo es necesario poner los siguientes comandos que nos
 
 `curl -H "Host: site3.local" http://apache-server`
 
+Para regresar a de carpeta se puede poner el comando `cd ..`
+
 ### 3. DNS - Bind
+
+Para este punto es necesario tener creados y en ejecucion los contenedores de squid-proxy y apache, ya colocados en la carpeta de **Proyecto-Final** nos vamos a la carpeta de dns con `cd dns-server`
+
+Creamos el contenedor de dns con el siguiente comando, cabe aclarar que este proceso puede tardar algunos minutos ya que es la primera vez que se crea el contenedor
+
+`docker build -t dns-server .`
+
+Ejecutamos el contenedor
+
+`docker run -d --name dns-server --network apache-net -p 53:53/tcp -p 53:53/udp dns-server`
+
+En este punto es necesario crear un nuevo contenedor cliente, para no depender de la terminal temporal de las herramientas de dns, por eso mismo seguimos los siguientes pasos, primeramente `cd ..` para regresar a la carpeta del proyecto, despues nos colocamos en la carpeta cliente mediante `cd cliente`
+
+Dentro de la carpeta cliente
+
+`docker build -t cliente-dns .`
+
+El comando anterior crea el contenedor cliente, este proceso puede tardar algunos minutos, cuando finalize ejecutamos el contenedor con el siguiente comando
+
+`docker run -it --name cliente --network apache-net cliente-dns`
+
+Despues de la ejecucion nos mandara a root, debe aparecer algo asi **root@2d7b8d2533e5:/#**, lo que nos indica estar dentro del contenedor y dentro de este vamos a probar al dns con los siguientes comandos
+
+`dig @dns-server www.site1.local`
+
+`dig @dns-server www.site2.local`
+
+`dig @dns-server www.site3.local`
+
+En cada uno de estos nos debe mostrar que el servidor fue encontrado, comprobando el funcionamiento de DNS-bind
+
+
+
+
 
 
