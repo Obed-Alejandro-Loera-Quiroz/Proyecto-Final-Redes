@@ -142,7 +142,11 @@ Despues de la ejecucion nos mandara a root, debe aparecer algo asi **root@2d7b8d
 
 `dig @dns-server www.site3.local`
 
-En cada uno de estos nos debe mostrar que el servidor fue encontrado, comprobando el funcionamiento de DNS-bind
+En cada uno de estos nos debe mostrar que el servidor fue encontrado, comprobando el funcionamiento de DNS-bind. Para regresar a de carpeta de cliente es necesario poner `exit` y para regresar a la carpeta del proyecto poner `cd ..`
+
+### 4. ipTables
+
+Para este este  punto es importante que todo lo anteriormente documentado ya este realizado y estemos colocados en la carpeta **Proyecto-Final**
 
 
 
