@@ -110,7 +110,7 @@ Al poner este comando ya solo es necesario poner los siguientes comandos que nos
 
 `curl -H "Host: site3.local" http://apache-server`
 
-Para regresar a de carpeta se puede poner el comando `cd ..`
+Para regresar a de carpeta de webserver es necesario poner èxit` y para regresar a la carpeta del proyecto poner `cd ..`
 
 ### 3. DNS - Bind
 
