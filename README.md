@@ -11,9 +11,9 @@ En cualquier navegador disponible en el dispositivo buscar docker, ingrear a la 
 [Instalacion de Docker](https://www.docker.com/)
 
 #### - Instalar WSL mediante los siguientes comandos en la terminal
-
-`wsl --install`
-
+```bash
+wsl --install
+```
 Esto instalará WSL, la última versión del kernel de Linux y Ubuntu automáticamente (en Windows 11). Después reiniciar la PC o laptop y por último, configure WSL 2 como predeterminado con el siguiente comando:
 
 `wsl --set-default-version 2`
