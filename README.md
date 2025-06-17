@@ -146,7 +146,25 @@ En cada uno de estos nos debe mostrar que el servidor fue encontrado, comproband
 
 ### 4. ipTables
 
-Para este este  punto es importante que todo lo anteriormente documentado ya este realizado y estemos colocados en la carpeta **Proyecto-Final**
+Para este este  punto es importante que todo lo anteriormente documentado ya este realizado y estemos colocados en la carpeta **Proyecto-Final**. Primero entramos a la carpeta `cd firewall-docker`, ya dentro lo primero que vamos hacer es construir el contenedor de docker-compose del firewall-docker que contiene el contenedor **clientea, clienteb y  firewall**, para esto primero usamos el siguiente comando 
+
+`docker-compose up -d`
+
+Este proceso puede tardar algunos minutos y es necesario que cada vez que se pruebe una nueva regla se vuelva a poner este comando, tambien sera necesario abrir otras 2 terminales de ubunto que es donde estaremos probando los contenedores de clientea y clienteb, en la primera terminal usualmente se usara para usar el contenedor de firewall, entonces dependiendo de la terminal en la que nos encontramos podemos poner los siguientes comandos.
+
+`docker exec -it firewall bash`
+
+`docker exec -it clientea bash`
+
+`docker exec -it clienteb bash`
+
+#### - Instalaciones necesarias 
+
+apt update && apt install -y curl
+
+#### 4.1  Denegar el acceso al puerto 80 (HTTP)
+
+Despues de haber realizados los pasos anteriores 
 
 
 
