@@ -150,9 +150,13 @@ En cada uno de estos nos debe mostrar que el servidor fue encontrado, comproband
 
 ### 4. ipTables
 
-Para este este  punto es importante que todo lo anteriormente documentado ya este realizado y estemos colocados en la carpeta **Proyecto-Final**. Primero entramos a la carpeta `cd firewall-docker`, ya dentro lo primero que vamos hacer es construir el contenedor de docker-compose del firewall-docker que contiene el contenedor **clientea, clienteb y  firewall**, para esto primero usamos el siguiente comando 
+Para este este  punto es importante que todo lo anteriormente documentado ya este realizado y estemos colocados en la carpeta **Proyecto-Final**. Primero aplicamos el siguente comando
 ```bash
-docker-compose up -d
+sed -i 's/\r$//' firewall-docker/firewall/reglas.sh
+```
+Despues nos vamos a la carpeta `cd firewall-docker`, ya dentro lo primero que vamos hacer es construir el contenedor de docker-compose del firewall-docker que contiene el contenedor **clientea, clienteb y  firewall**, para esto primero usamos el siguiente comando 
+```bash
+docker-compose up --build -d
 ```
 Este proceso puede tardar algunos minutos y es necesario que cada vez que se pruebe una nueva regla se vuelva a poner este comando, tambien sera necesario abrir otras 2 terminales de ubunto que es donde estaremos probando los contenedores de clientea y clienteb, en la primera terminal usualmente se usara para usar el contenedor de firewall, entonces dependiendo de la terminal en la que nos encontramos podemos poner los siguientes comandos.
 ```bash
@@ -164,13 +168,38 @@ docker exec -it clientea bash
 ```bash
 docker exec -it clienteb bash
 ```
-#### - Instalaciones necesarias 
+#### - Datos necesarios 
+Comando necesario para las actualizaciones
+```bash
+apt update
+```
+Comando necesario para actualizar y guardar las reglas
+```bash
+./reglas.sh
+```
+Comando necesario para ver el estado de las iptables, usualmente este comando ayuda a saber si las reglas se estan cumpliendo de forma correcta
+```bash
+iptables -L -v -n
+```
+#### 4.1 Denegar el acceso al puerto 80 (HTTP)
 
-apt update && apt install -y curl
+Despues de haber realizados los pasos anteriores es necesario abrir el archivo **reglas.sh**, este documento esta todo comentado, para esta primer regla es necesario quitar lo comentado, esto se hace simplemente eliminando el **#**. El primer paso es ingresar el comando para ver las iptables, el cual muestra que no hay ninguna regla aplicada, por esto mismo usamos el comando para actualizar y guardar reglas.
 
-#### 4.1  Denegar el acceso al puerto 80 (HTTP)
+Despues de estos, no dirigimos a el contenedor clientea que se abrio en segunda instancia y ejecutamos el siguiente comando
+```bash
+ curl http://192.168.200.2
+```
+Nos mostrara una salida la cual nos indica que no se pudo conectar con el servidor, eso ya cumple con la regla pero si deseamos comprobar esto podemos regresar al contenedor de firewall y ejecutar el comando de iptables, si se nos muestra que paquetes y bytes son difrentes de cero entonces si funciono adecuadamente
 
-Despues de haber realizados los pasos anteriores 
+#### 4.2 Bloquear el acceso al puerto 21 (FTP) 
+
+Es necesario quitar el comentario de la segunda regla y colocar de nuevo el de la primera regla, despues de esto repetimos todo el proceso inicial, en firewall colocamos el comando de iptables y despues el de guardado de reglas, esto para poder actualizar todo, despues nos vamos a el contenedor clienteb y ejecutamos el siguiente comando 
+```bash
+telnet 192.168.200.2 21
+```
+Debe arrojar algo asi **Trying 192.168.200.2... telnet: Unable to connect to remote host: Connection refused** esto nos indica que efectivamente se bloqueo el acceso al puerto 21, solo quedaria comprobarlo, para esto se ingresa el comando de iptables en firewall en el cual debemos ver algun paquete y byte para ver que efectivamente la regla esta funcionando
+
+ 
 
 
 
