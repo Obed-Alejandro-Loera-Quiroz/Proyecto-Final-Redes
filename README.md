@@ -260,8 +260,19 @@ Connection to 192.168.200.2 80 port [tcp/http] failed: Connection refused
 ...** 
 
 Se quedara esperando respuesta y en el contenedor firewall que se encuentra en otra terminal verificamos el funcionamiento ingresando el comando de iptables, eso nos arrojara una respuesta en cuanto a paquetes y bytes, es necesario hacer varias pruebas para comprobar el limite de conexiones simultaneas del equipo, cuando se obtenga un numero alto de paquetes que supere las 20 conexiones simultaneas se activara el RECJECT, entonces ya con esto mostramos el funcionamiento de la regla 
- 
 
+ #### 4.7 Bloquear todo tráfico saliente a sitios con destino al puerto 443 (HTTPS)
+
+ Es necesario quitar el comentario de la septima regla y colocar de nuevo el de la sexta regla, despues de esto repetimos todo el proceso inicial, en esta ocasion solo vamos a trabajar con el contenedor de firewall, entonces primeramente se asignara el comando de iptables para verificar que la regla esta activada, despues es necesario instalar curl para poder trabajar y verificar esta regla, por eso mismo ingresamos el siguiente comando 
+ ```bash
+apt-get update
+apt-get install -y curl
+```
+Despues de que se realice la instalacion podemos continuar con la practica ingresando el siguiente comando
+```bash
+curl https://google.com:443
+```
+Si todo esta correcto debemos recibir la siguinte respuesta o algo similar **curl: (7) Failed to connect to google.com port 443 after 27 ms: Couldn't connect to server**, aunque ya con esto comprobamos que si esta bloqueando el trafico saliente a sitios con destino al puerto 443 tambien podemos ingresar el comando de iptables y si los paquetes y bytes se activaron todo funciona correctamente 
 
 
 
