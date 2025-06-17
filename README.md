@@ -15,9 +15,9 @@ En cualquier navegador disponible en el dispositivo buscar docker, ingrear a la 
 wsl --install
 ```
 Esto instalará WSL, la última versión del kernel de Linux y Ubuntu automáticamente (en Windows 11). Después reiniciar la PC o laptop y por último, configure WSL 2 como predeterminado con el siguiente comando:
-
-`wsl --set-default-version 2`
-
+```bash
+wsl --set-default-version 2`
+```
 #### - Instalar Ubuntu 
 
 Abre Microsoft Store, busca Ubuntu, elige la versión que mas gustes e instala o en algunos casos aparece la opción de obtener, abre el menú inicio y busca Ubuntu. Al abrirlo por primera vez, se instalará y te pedirá el nombre de usuario y la contraseña 
@@ -41,15 +41,15 @@ Clonar el repositorio dentro del apartado **Linux** que fue agregado con base a 
 En este punto abrimos la terminal de Ubuntu, para esto primero abres tu terminal como normalmente se hace, en el apartado derecho viene una flecha hacia abajo, presionamos esta y nos mostrara vaarias terminales, en este caso seleccionamos la de Ubuntu
 
 Con esto realizado y esta en la terminal de Ubuntu vamos a comenzar con las cosas solicitadas en proyecto. Primeramente ingresando el siguiente comando para colocarnos en la carpeta del proyecto, de igual manera es necesario abrir docker para este punto 
-
-`cd Proyecto-Final`
-
+```bash
+cd Proyecto-Final
+```
 ### 1. Squid – Proxy
 
 En este punto nos vamos a la carpeta de squid mediante 
-
-`cd Redes-proyecto`
-
+```bash
+cd Redes-proyecto
+```
 Dentro vamos a poner los siguientes comandos, cabe aclarar que en este punto puede que tarde argunos minutos, principalmente porque es la primera vez se se construye el contenedor y tambien depende mucho de la conexion a internet 
 
 `docker build -t squid-proxy .`
