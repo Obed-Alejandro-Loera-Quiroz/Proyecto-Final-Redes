@@ -221,6 +221,27 @@ ping -c 2 192.168.200.5
 ```
  Estas al estar fuera del rango de red no necesariamente dan una respuesta, lo importante de estas es que si aplicamos nuevamente el comando de iptables se podra ver que no hubo aumento de paquetes bloqueados, esto indica que esta respetando el rango establecido
 
+ #### 4.4 Bloquear las respuestas ICMP tipo “ping” (echo-reply) 
+
+ Es necesario quitar el comentario de la cuarta regla y colocar de nuevo el de la tercera regla, despues de esto repetimos todo el proceso inicial, despues de esto simplemente nos vamos al contenedor de firewall y ponemos los comandos de iptables y gusrdado y actualizacion de reglas, las reglas se deberian ver aplicadas
+
+ En el contenedor de clientea vamos a poner el siguiente comando
+ ```bash
+ping -c 4 192.168.200.2
+```
+Lo normal es que como repuesta obtengamos lo siguiente **PING 192.168.200.2 (192.168.200.2) 56(84) bytes of data --- 192.168.200.2 ping statistics --- 4 packets transmitted, 0 received, 100% packet loss, time 3052ms**, en el firewall podemos ingresar el comando de iptables y este nos va a indicar cierto numero de paquetes lo cual en este punto es bueno ya que idica el apto funcionamiento de la regla 4.
+
+Otra forma de mostrar el funcionamiento es haciendo lo siguiente, ingresamos el siguiente comando que desactiva la regla temporalmente 
+```bash
+iptables -D OUTPUT -p icmp --icmp-type echo-reply -j DROP
+```
+Si volvemos a aplicar el ping desde cliente a podremos observar que los paquetes en esta ocasion si son recibidos y no hay ninguna perdida, comfirmando que la regla es la que esta bloqueando las respuestas, es importante ingresar el siguiente comando para restaurar la regla 
+```bash
+iptables -A OUTPUT -p icmp --icmp-type echo-reply -j DROP
+```
+
+ 
+
 
 
 
