@@ -96,7 +96,7 @@ docker run -d --name apache-server --network apache-net -p 8080:80 apache-mis-si
 ```
 Con esto, ya tenemos el contenedor incial para los host virtuales mediante apache, ahora es necesario crear un contenedor cliente que nos ayudara a que nuestro proyecto funcione correctamente, esto mediante el siguiente comando
 ```bash
-docker run -it --rm --name cliente --network apache-net curlimages/curl sh
+docker run -it --rm --name cliente --network apache-net curlimages/curl sh
 ```
 En caso de que este comando indique algun error colocar el siguiente comando que lo que hace es buscar la imagen, si esta no se encuentra la crea, si funciona correctamente es necesario volver a poner el comando `docker run -it --rm --name cliente --network apache-net curlimages/curl sh` .En caso de que el anterior comando a este no marcase ningun error, hacer caso omiso a este paso. 
 ```bash
