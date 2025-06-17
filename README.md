@@ -50,7 +50,7 @@ En este punto nos vamos a la carpeta de squid mediante
 ```bash
 cd Redes-proyecto
 ```
-Dentro vamos a poner los siguientes comandos, cabe aclarar que en este punto puede que tarde argunos minutos, principalmente porque es la primera vez se se construye el contenedor y tambien depende mucho de la conexion a internet 
+Dentro vamos a poner los siguientes comandos, cabe aclarar que en este punto puede que tarde algunos minutos, principalmente porque es la primera vez se se construye el contenedor y tambien depende mucho de la conexion a internet 
 ```bash
 docker build -t squid-proxy .
 ```
