@@ -223,7 +223,7 @@ ping -c 2 192.168.200.5
 
  #### 4.4 Bloquear las respuestas ICMP tipo “ping” (echo-reply) 
 
- Es necesario quitar el comentario de la cuarta regla y colocar de nuevo el de la tercera regla, despues de esto repetimos todo el proceso inicial, despues de esto simplemente nos vamos al contenedor de firewall y ponemos los comandos de iptables y gusrdado y actualizacion de reglas, las reglas se deberian ver aplicadas
+Es necesario quitar el comentario de la cuarta regla y colocar de nuevo el de la tercera regla, despues de esto repetimos todo el proceso inicial, despues de esto simplemente nos vamos al contenedor de firewall y ponemos los comandos de iptables y gusrdado y actualizacion de reglas, las reglas se deberian ver aplicadas
 
  En el contenedor de clientea vamos a poner el siguiente comando
  ```bash
@@ -239,7 +239,27 @@ Si volvemos a aplicar el ping desde cliente a podremos observar que los paquetes
 ```bash
 iptables -A OUTPUT -p icmp --icmp-type echo-reply -j DROP
 ```
+ #### 4.6 Limitar el número de conexiones simultáneas por equipo a un máximo de 20. 
 
+Es necesario quitar el comentario de la sexta regla y colocar de nuevo el de la cuarta regla, despues de esto repetimos todo el proceso inicial, para esta regla vamos a trabajar en clientea, asi que nos metemos en su contenedor, tambien es necesario en otra terminal meternos de nuevo al contenedor firewall ya que vamos a hacer pruebas simultaneas en firewall, para esto primero vamos a instalar netcat con el siguiente comando 
+```bash
+apt update
+apt install -y netcat-openbsd
+```
+Con esto instalado ingresamos el siguiente comando el cual hace una espera de conexiones en el puerto 80, cabe aclarar que no se recibira respuesta alguna hasta ingresar el comando correspondiente, para probar la regla 6 
+```bash
+nc -l -p 80
+```
+En el contenedor de clientea se ingresa el siguiente comando que prueba la regla 6  
+```bash
+for i in $(seq 1 25); do telnet 192.168.200.2 80 & done
+```
+Es normal que como respuesta se arroje lo siguiente 
+**Connection to 192.168.200.2 80 port [tcp/http] succeeded!
+Connection to 192.168.200.2 80 port [tcp/http] failed: Connection refused
+...** 
+
+Se quedara esperando respuesta y en el contenedor firewall que se encuentra en otra terminal verificamos el funcionamiento ingresando el comando de iptables, eso nos arrojara una respuesta en cuanto a paquetes y bytes, es necesario hacer varias pruebas para comprobar el limite de conexiones simultaneas del equipo, cuando se obtenga un numero alto de paquetes que supere las 20 conexiones simultaneas se activara el RECJECT, entonces ya con esto mostramos el funcionamiento de la regla 
  
 
 
