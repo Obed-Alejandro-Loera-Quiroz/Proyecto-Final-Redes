@@ -263,7 +263,7 @@ Se quedara esperando respuesta y en el contenedor firewall que se encuentra en o
 
  #### 4.7 Bloquear todo tráfico saliente a sitios con destino al puerto 443 (HTTPS)
 
- Es necesario quitar el comentario de la septima regla y colocar de nuevo el de la sexta regla, despues de esto repetimos todo el proceso inicial, en esta ocasion solo vamos a trabajar con el contenedor de firewall, entonces primeramente se asignara el comando de iptables para verificar que la regla esta activada, despues es necesario instalar curl para poder trabajar y verificar esta regla, por eso mismo ingresamos el siguiente comando 
+Es necesario quitar el comentario de la septima regla y colocar de nuevo el de la sexta regla, despues de esto repetimos todo el proceso inicial, en esta ocasion solo vamos a trabajar con el contenedor de firewall, entonces primeramente se asignara el comando de iptables para verificar que la regla esta activada, despues es necesario instalar curl para poder trabajar y verificar esta regla, por eso mismo ingresamos el siguiente comando 
  ```bash
 apt-get update
 apt-get install -y curl
@@ -273,6 +273,21 @@ Despues de que se realice la instalacion podemos continuar con la practica ingre
 curl https://google.com:443
 ```
 Si todo esta correcto debemos recibir la siguinte respuesta o algo similar **curl: (7) Failed to connect to google.com port 443 after 27 ms: Couldn't connect to server**, aunque ya con esto comprobamos que si esta bloqueando el trafico saliente a sitios con destino al puerto 443 tambien podemos ingresar el comando de iptables y si los paquetes y bytes se activaron todo funciona correctamente 
+
+ #### 4.8 Permitir únicamente tráfico SSH (puerto 22) desde una IP autorizada 
+
+ Es necesario quitar el comentario de la octava regla y colocar de nuevo el de la septima regla, despues de esto repetimos todo el proceso inicial, en el contenedor de firewalls usamos el comando de iptables para ver si la regla esta activa, en el contenedor de clientea vamos a probar el siguiente comando
+ ```bash
+ssh root@192.168.200.2
+```
+Despues de este comando te va a pedir que cofirmes si quieres continuar con la conexion, se debe escribir **yes**, despues de esto te  pedira una contraseña para root, se debe ingresar la siguiente
+ ```bash
+rootpassword
+```
+Esto nos permitira entrar y se comprueba que permite el trafico, en este punto es necesario verificar que funciono adecuadamente, entonces en el firewall ponemos el comando de iptables y si los paquetes no se activaron demuestra el apto funcionamineto de esta regla
+
+Para comprobar que si funciono todo, en firewall ponemos ponemos el comando `ssh root@192.168.200.2`, donde deberia mandarnos un mensaje como este **ssh: connect to host 192.168.200.2 port 22: Connection refused**. Si ingresamos nuevamente el comando de iptables podemos ver que en esta ocasion los paquetes si se activaron y eso demuestra que todo fucniona correctamente
+ 
 
 
 
