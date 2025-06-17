@@ -16,7 +16,7 @@ wsl --install
 ```
 Esto instalará WSL, la última versión del kernel de Linux y Ubuntu automáticamente (en Windows 11). Después reiniciar la PC o laptop y por último, configure WSL 2 como predeterminado con el siguiente comando:
 ```bash
-wsl --set-default-version 2`
+wsl --set-default-version 2
 ```
 #### - Instalar Ubuntu 
 
@@ -51,17 +51,17 @@ En este punto nos vamos a la carpeta de squid mediante
 cd Redes-proyecto
 ```
 Dentro vamos a poner los siguientes comandos, cabe aclarar que en este punto puede que tarde argunos minutos, principalmente porque es la primera vez se se construye el contenedor y tambien depende mucho de la conexion a internet 
-
-`docker build -t squid-proxy .`
-
+```bash
+docker build -t squid-proxy .
+```
 En caso de que te marque error poner el siguiente comando y en caso de que no, hacer caso omiso a este apartado 
-
-`docker buildx build -t squid-proxy .`
-
+```bash
+docker buildx build -t squid-proxy .
+```
 Esto lo que hace es que levantara el contenedor de squid y proxy, después de esto se ingresa el siguiente comando 
-
-`docker run -d --name squid-proxy -p 3128:3128 squid-proxy`
-
+```bash
+docker run -d --name squid-proxy -p 3128:3128 squid-proxy
+```
 Este comando permite la ejecución del contenedor. 
 
 Podras apreciar como en Docker el contenedor de **squid-proxy** ya fue creado.Ahora bien dentro del navegador FireFox ya con la configuración establecida anteriormente podemos hacer la búsqueda de las siguientes páginas las cuales te mostraran una restricción por parte de proxy:
@@ -83,33 +83,35 @@ Para regresar a de carpeta se puede poner el comando `cd ..`
 ### 2. Host Virtuales
 
 Despues de haber regresado a la  carpeta inicial, ponemos el siguiente comando para colocarnos en la carpeta
-
-`cd webserver`
-
+```bash
+cd webserver
+```
 A continuacion colocar el siguiente comando, para la creacion del contenedor, esto puede tardar varios minutos 
-
-`docker network create apache-net`
-
+```bash
+docker network create apache-net
+```
 Despues poner el siguiente comando 
-
-`docker run -d --name apache-server --network apache-net -p 8080:80 apache-mis-sitios`
-
+```bash
+docker run -d --name apache-server --network apache-net -p 8080:80 apache-mis-sitios
+```
 Con esto, ya tenemos el contenedor incial para los host virtuales mediante apache, ahora es necesario crear un contenedor cliente que nos ayudara a que nuestro proyecto funcione correctamente, esto mediante el siguiente comando
-
-`docker run -it --rm --name cliente --network apache-net curlimages/curl sh`
-
+```bash
+docker run -it --rm --name cliente --network apache-net curlimages/curl sh
+```
 En caso de que este comando indique algun error colocar el siguiente comando que lo que hace es buscar la imagen, si esta no se encuentra la crea, si funciona correctamente es necesario volver a poner el comando `docker run -it --rm --name cliente --network apache-net curlimages/curl sh` .En caso de que el anterior comando a este no marcase ningun error, hacer caso omiso a este paso. 
-
-`docker pull curlimages/curl`
-
+```bash
+docker pull curlimages/curl
+```
 Al poner este comando ya solo es necesario poner los siguientes comandos que nos mostraran el apto funcionamiento de esta parte del proyecto
-
-`curl -H "Host: site1.local" http://apache-server`
-
-`curl -H "Host: site2.local" http://apache-server`
-
-`curl -H "Host: site3.local" http://apache-server`
-
+```bash
+curl -H "Host: site1.local" http://apache-server
+```
+```bash
+curl -H "Host: site2.local" http://apache-server
+```
+```bash
+curl -H "Host: site3.local" http://apache-server
+```
 Para regresar a de carpeta de webserver es necesario poner `exit` y para regresar a la carpeta del proyecto poner `cd ..`
 
 ### 3. DNS - Bind
@@ -117,47 +119,51 @@ Para regresar a de carpeta de webserver es necesario poner `exit` y para regresa
 Para este punto es necesario tener creados y en ejecucion los contenedores de squid-proxy y apache, ya colocados en la carpeta de **Proyecto-Final** nos vamos a la carpeta de dns con `cd dns-server`
 
 Creamos el contenedor de dns con el siguiente comando, cabe aclarar que este proceso puede tardar algunos minutos ya que es la primera vez que se crea el contenedor
-
-`docker build -t dns-server .`
-
+```bash
+docker build -t dns-server .
+```
 Ejecutamos el contenedor
-
-`docker run -d --name dns-server --network apache-net -p 53:53/tcp -p 53:53/udp dns-server`
-
+```bash
+docker run -d --name dns-server --network apache-net -p 53:53/tcp -p 53:53/udp dns-server
+```
 En este punto es necesario crear un nuevo contenedor cliente, para no depender de la terminal temporal de las herramientas de dns, por eso mismo seguimos los siguientes pasos, primeramente `cd ..` para regresar a la carpeta del proyecto, despues nos colocamos en la carpeta cliente mediante `cd cliente`
 
 Dentro de la carpeta cliente
-
-`docker build -t cliente-dns .`
-
+```bash
+docker build -t cliente-dns .
+```
 El comando anterior crea el contenedor cliente, este proceso puede tardar algunos minutos, cuando finalize ejecutamos el contenedor con el siguiente comando
-
-`docker run -it --name cliente --network apache-net cliente-dns`
-
+```bash
+docker run -it --name cliente --network apache-net cliente-dns
+```
 Despues de la ejecucion nos mandara a root, debe aparecer algo asi **root@2d7b8d2533e5:/#**, lo que nos indica estar dentro del contenedor y dentro de este vamos a probar al dns con los siguientes comandos
-
-`dig @dns-server www.site1.local`
-
-`dig @dns-server www.site2.local`
-
-`dig @dns-server www.site3.local`
-
+```bash
+dig @dns-server www.site1.local
+```
+```bash
+dig @dns-server www.site2.local
+```
+```bash
+dig @dns-server www.site3.local
+```
 En cada uno de estos nos debe mostrar que el servidor fue encontrado, comprobando el funcionamiento de DNS-bind. Para regresar a de carpeta de cliente es necesario poner `exit` y para regresar a la carpeta del proyecto poner `cd ..`
 
 ### 4. ipTables
 
 Para este este  punto es importante que todo lo anteriormente documentado ya este realizado y estemos colocados en la carpeta **Proyecto-Final**. Primero entramos a la carpeta `cd firewall-docker`, ya dentro lo primero que vamos hacer es construir el contenedor de docker-compose del firewall-docker que contiene el contenedor **clientea, clienteb y  firewall**, para esto primero usamos el siguiente comando 
-
-`docker-compose up -d`
-
+```bash
+docker-compose up -d
+```
 Este proceso puede tardar algunos minutos y es necesario que cada vez que se pruebe una nueva regla se vuelva a poner este comando, tambien sera necesario abrir otras 2 terminales de ubunto que es donde estaremos probando los contenedores de clientea y clienteb, en la primera terminal usualmente se usara para usar el contenedor de firewall, entonces dependiendo de la terminal en la que nos encontramos podemos poner los siguientes comandos.
-
-`docker exec -it firewall bash`
-
-`docker exec -it clientea bash`
-
-`docker exec -it clienteb bash`
-
+```bash
+docker exec -it firewall bash
+```
+```bash
+docker exec -it clientea bash
+```
+```bash
+docker exec -it clienteb bash
+```
 #### - Instalaciones necesarias 
 
 apt update && apt install -y curl
