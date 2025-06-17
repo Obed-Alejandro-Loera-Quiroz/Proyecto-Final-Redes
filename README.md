@@ -6,7 +6,7 @@ Proyecto Final de Redes de Computadores, donde se implementó proxy, host virtua
 
 #### - Instalación de Docker
 
-En cualquier navegador disponible en el dispositivo buscar docker, ingrear a la primera pagina disponible e ir al aparatdo de descarga, en ese apartado hay varias opciones de instalacion, elige la mas apropiada segun tu PC. En Docker es recomendable crear una cuenta para el optimo funcionamiento 
+En cualquier navegador disponible en el dispositivo buscar docker, ingresar a la primera pagina disponible e ir al aparatdo de descarga, en ese apartado hay varias opciones de instalacion, elige la mas apropiada segun tu PC. En Docker es recomendable crear una cuenta para el optimo funcionamiento 
 
 [Instalacion de Docker](https://www.docker.com/)
 
@@ -78,7 +78,7 @@ Podras apreciar como en Docker el contenedor de **squid-proxy** ya fue creado.Ah
 
 Cualquier otra pagina te debe permitir el acceso 
 
-Para regresar a de carpeta se puede poner el comando `cd ..`
+Para regresar de carpeta se puede poner el comando `cd ..`
 
 ### 2. Host Virtuales
 
@@ -98,7 +98,7 @@ Con esto, ya tenemos el contenedor incial para los host virtuales mediante apach
 ```bash
 docker run -it --rm --name cliente --network apache-net curlimages/curl sh
 ```
-En caso de que este comando indique algun error colocar el siguiente comando que lo que hace es buscar la imagen, si esta no se encuentra la crea, si funciona correctamente es necesario volver a poner el comando `docker run -it --rm --name cliente --network apache-net curlimages/curl sh` .En caso de que el anterior comando a este no marcase ningun error, hacer caso omiso a este paso. 
+En caso de que este comando indique algun error colocar el siguiente comando que lo que hace es buscar la imagen, si esta no se encuentra la crea, si funciona correctamente es necesario volver a poner el comando `docker run -it --rm --name cliente --network apache-net curlimages/curl sh` .En caso de que el anterior comando no marcase ningun error, hacer caso omiso a este paso. 
 ```bash
 docker pull curlimages/curl
 ```
@@ -150,7 +150,7 @@ En cada uno de estos nos debe mostrar que el servidor fue encontrado, comproband
 
 ### 4. ipTables
 
-Para este este  punto es importante que todo lo anteriormente documentado ya este realizado y estemos colocados en la carpeta **Proyecto-Final**. Primero aplicamos el siguente comando
+Para este este  punto es importante que todo lo anteriormente documentado ya este realizado y estemos colocados en la carpeta **Proyecto-Final**. Primero aplicamos el siguente comando, esto porque puede que el proyecto recibiera modificaciones al momento de subirse a GitHub
 ```bash
 sed -i 's/\r$//' firewall-docker/firewall/reglas.sh
 ```
@@ -158,7 +158,7 @@ Despues nos vamos a la carpeta `cd firewall-docker`, ya dentro lo primero que va
 ```bash
 docker-compose up --build -d
 ```
-Este proceso puede tardar algunos minutos y es necesario que cada vez que se pruebe una nueva regla se vuelva a poner este comando, tambien sera necesario abrir otras 2 terminales de ubunto que es donde estaremos probando los contenedores de clientea y clienteb, en la primera terminal usualmente se usara para usar el contenedor de firewall, entonces dependiendo de la terminal en la que nos encontramos podemos poner los siguientes comandos.
+Este proceso puede tardar algunos minutos y es necesario que cada vez que se pruebe una nueva regla se vuelva a poner este comando, sera necesario abrir otras 2 terminales de ubunto que es donde estaremos probando los contenedores de clientea y clienteb, en la primera terminal usualmente se usara para el contenedor de firewall, entonces dependiendo de la terminal en la que nos encontramos podemos poner los siguientes comandos.
 ```bash
 docker exec -it firewall bash
 ```
@@ -205,14 +205,14 @@ Es necesario quitar el comentario de la tercera regla y colocar de nuevo el de l
 ```bash
 apt-get update && apt-get install -y iputils-ping
 ```
-Despues de esto podemos ingresar el comando de iptables y el de actualizacion y guardado de reglas
+Despues de esto podemos ingresar el comando de iptables, el de actualizacion y guardado de reglas
 
 Lo que sigue en este punto es colocar alguna de las siguientes ips que se encuentran en el rango de lo solicitado en esta regla
 ```bash
 ping -c 2 192.168.200.10
 ping -c 2 192.168.200.20
 ```
-Cualquiera de estas ips o las que se encuentren en el rango deberian mandar un mensaje similar a este despues de ping **PING 192.168.200.20 (192.168.200.20) 56(84) bytes of data. --- 192.168.200.20 ping statistics --- 2 packets transmitted, 0 received, 100% packet loss, time 1038ms**, la forma de comprobar el funcionamiento de esta regla es que cada vez que hagamos un ping ingresemos el comando de iptables que nos mostrara el aumento de paquetes y bytes
+Cualquiera de estas ips o las que se encuentren en el rango deberian mandar un mensaje como este despues de ping **PING 192.168.200.20 (192.168.200.20) 56(84) bytes of data. --- 192.168.200.20 ping statistics --- 2 packets transmitted, 0 received, 100% packet loss, time 1038ms**, la forma de comprobar el funcionamiento de esta regla es que cada vez que hagamos un ping ingresemos el comando de iptables que nos mostrara el aumento de paquetes y bytes
 
 Otra forma de mostrar el funcionamineto es ingresando unas ips fuera del rango solicitado como las siguientes 
 ```bash
@@ -223,7 +223,7 @@ ping -c 2 192.168.200.5
 
  #### 4.4 Bloquear las respuestas ICMP tipo “ping” (echo-reply) 
 
-Es necesario quitar el comentario de la cuarta regla y colocar de nuevo el de la tercera regla, despues de esto repetimos todo el proceso inicial, despues de esto simplemente nos vamos al contenedor de firewall y ponemos los comandos de iptables y gusrdado y actualizacion de reglas, las reglas se deberian ver aplicadas
+Es necesario quitar el comentario de la cuarta regla y colocar de nuevo el de la tercera regla, despues de esto repetimos todo el proceso inicial, Primeramente nos vamos al contenedor de firewall y ponemos los comandos de iptables, guardado y actualizacion de reglas, las reglas se deberian ver aplicadas
 
  En el contenedor de clientea vamos a poner el siguiente comando
  ```bash
@@ -235,7 +235,7 @@ Otra forma de mostrar el funcionamiento es haciendo lo siguiente, ingresamos el 
 ```bash
 iptables -D OUTPUT -p icmp --icmp-type echo-reply -j DROP
 ```
-Si volvemos a aplicar el ping desde cliente a podremos observar que los paquetes en esta ocasion si son recibidos y no hay ninguna perdida, comfirmando que la regla es la que esta bloqueando las respuestas, es importante ingresar el siguiente comando para restaurar la regla 
+Si volvemos a aplicar el ping desde cliente a podremos observar que los paquetes en esta ocasión si son recibidos y no hay ninguna perdida, confirmando que la regla es la que esta bloqueando las respuestas, es importante ingresar el siguiente comando para restaurar la regla 
 ```bash
 iptables -A OUTPUT -p icmp --icmp-type echo-reply -j DROP
 ```
