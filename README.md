@@ -199,7 +199,27 @@ telnet 192.168.200.2 21
 ```
 Debe arrojar algo asi **Trying 192.168.200.2... telnet: Unable to connect to remote host: Connection refused** esto nos indica que efectivamente se bloqueo el acceso al puerto 21, solo quedaria comprobarlo, para esto se ingresa el comando de iptables en firewall en el cual debemos ver algun paquete y byte para ver que efectivamente la regla esta funcionando
 
- 
+#### 4.3 Denegar el tráfico de salida
+
+Es necesario quitar el comentario de la tercera regla y colocar de nuevo el de la segunda regla, despues de esto repetimos todo el proceso inicial, en esta ocasion trabajaremos especialmente en el contenedor de firewall, entonces primeramente instalamos ping en este contenedor de la siguiente forma 
+```bash
+apt-get update && apt-get install -y iputils-ping
+```
+Despues de esto podemos ingresar el comando de iptables y el de actualizacion y guardado de reglas
+
+Lo que sigue en este punto es colocar alguna de las siguientes ips que se encuentran en el rango de lo solicitado en esta regla
+```bash
+ping -c 2 192.168.200.10
+ping -c 2 192.168.200.20
+```
+Cualquiera de estas ips o las que se encuentren en el rango deberian mandar un mensaje similar a este despues de ping **PING 192.168.200.20 (192.168.200.20) 56(84) bytes of data. --- 192.168.200.20 ping statistics --- 2 packets transmitted, 0 received, 100% packet loss, time 1038ms**, la forma de comprobar el funcionamiento de esta regla es que cada vez que hagamos un ping ingresemos el comando de iptables que nos mostrara el aumento de paquetes y bytes
+
+Otra forma de mostrar el funcionamineto es ingresando unas ips fuera del rango solicitado como las siguientes 
+```bash
+ping -c 2 192.168.200.128
+ping -c 2 192.168.200.5
+```
+ Estas al estar fuera del rango de red no necesariamente dan una respuesta, lo importante de estas es que si aplicamos nuevamente el comando de iptables se podra ver que no hubo aumento de paquetes bloqueados, esto indica que esta respetando el rango establecido
 
 
 
