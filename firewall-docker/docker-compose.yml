@@ -1,0 +1,30 @@
+services:
+  firewall:
+    build: ./firewall
+    container_name: firewall
+    cap_add:
+      - NET_ADMIN
+    networks:
+      test-net:
+        ipv4_address: 192.168.200.2
+
+  clientea:
+    build: ./clientea
+    container_name: clientea
+    networks:
+      test-net:
+        ipv4_address: 192.168.200.10
+
+  clienteb:
+    build: ./clienteb
+    container_name: clienteb
+    networks:
+      test-net:
+        ipv4_address: 192.168.200.20
+
+networks:
+  test-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.200.0/24
